@@ -6,6 +6,11 @@ import createError from "http-errors";
 app.use(express.json());
 const PORT = 5000;
 
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 app.get("/", (req, res) => {
   res.send("¡Bienvenido al API de Mueblería Jota!");
 });
