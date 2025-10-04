@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import { useEffect, useState } from "react";
+import ProductList from "./components/ProductList";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -20,7 +21,9 @@ function App() {
   // nota: para insertar la imagen, usen esta url `https://raw.githubusercontent.com/TomasVolpini/ITBA-Muebleria-Jota/refs/heads/develop/server${product.imagen}`
   // nota 2: seguramente haya que cambiar tanto la ruta del fetch como la de img cuando hagamos merge al main, porque ahora la base de datos a la que hacemos fetch está en la rama develop, la cual va a ser eliminada después de hacer merge
 
-  return <></>;
+  return <>
+  <ProductList  producto={{products}} />
+  </>;
 }
 
 export default App;
