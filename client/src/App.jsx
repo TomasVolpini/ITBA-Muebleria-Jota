@@ -2,10 +2,13 @@ import "./styles/App.css";
 import { useEffect, useState } from "react";
 import ProductList from "./components/ProductList";
 import NavBar from "./components/Navbar";
+import ProductDetail from "./components/ProductDetail";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [ruta, setRuta] = useState("/");
+  const idBuscado = ruta;
+  const indice = products.findIndex((producto) => producto.id === idBuscado);
 
   // hago fetch al json que tiene la info de los productos y lo guardo en la variable "products".
   useEffect(() => {
@@ -29,7 +32,14 @@ function App() {
   return (
     <>
       <NavBar></NavBar>
-      <ProductList products={products} setRuta={setRuta} />
+      {ruta === "/" && <ProductList products={products} setRuta={setRuta} />}
+      {ruta !== "/" && (
+        <ProductDetail
+          products={products[indice]}
+          setRuta={setRuta}
+          ruta={ruta}
+        />
+      )}
     </>
   );
 }
