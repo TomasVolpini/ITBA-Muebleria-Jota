@@ -1,43 +1,16 @@
-// client/src/components/ProductCard.jsx
-export default function ProductCard({ producto, onClick, mostrarPrecio = true }) {
-  if (!producto) return null;
-
-  const nombre = producto.nombre?.trim() || "Producto sin nombre";
-  const src = producto.imagen
-    ? (producto.imagen.startsWith("/") ? producto.imagen : `/${producto.imagen}`)
-    : "/img/placeholder.jpg";
-
-  const precioFmt =
-    typeof producto.precio === "number"
-      ? new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS" }).format(producto.precio)
-      : (producto.precio ?? "");
-
-  const isClickable = typeof onClick === "function";
-  const handleKeyDown = (e) => {
-    if (!isClickable) return;
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      onClick(producto);
-    }
-  };
+export default function ProductCard({ product, setRuta }) {
+  const urlImg = `https://raw.githubusercontent.com/TomasVolpini/ITBA-Muebleria-Jota/refs/heads/develop/server${product.imagen}`;
+  // nota 2: seguramente haya que cambiar tanto la ruta del fetch como la de img cuando hagamos merge al main, porque ahora la base de datos a la que hacemos fetch está en la rama develop, la cual va a ser eliminada después de hacer merge
+  function handleClick() {
+    setRuta(`/${product.id}`);
+  }
 
   return (
-    <article
-      className={`product-card${isClickable ? " is-clickable" : ""}`}
-      onClick={isClickable ? () => onClick(producto) : undefined}
-      onKeyDown={handleKeyDown}
-      role={isClickable ? "button" : undefined}
-      tabIndex={isClickable ? 0 : undefined}
-    >
-      <div className="thumb">
-        <img src={src} alt={nombre} loading="lazy" />
-      </div>
-
-      <h3 className="name">{nombre}</h3>
-
-      {mostrarPrecio && precioFmt !== "" && (
-        <p className="price">{precioFmt}</p>
-      )}
-    </article>
+    <div className="card">
+      <img src={urlImg} alt="" />
+      <p className="product-name">{product.nombre}</p>
+      <p className="product-price">{product.precio}</p>
+      <button onClick={handleClick}>Ver más</button>
+    </div>
   );
 }
