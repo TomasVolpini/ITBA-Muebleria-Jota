@@ -1,7 +1,6 @@
 import "./styles/App.css";
 import { useEffect, useState } from "react";
 import ProductList from "./components/ProductList";
-import NavBar from "./components/Navbar";
 import ProductDetail from "./components/ProductDetail";
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
 
   return (
     <>
-      <NavBar></NavBar>
       {ruta === "/" && <ProductList products={products} setRuta={setRuta} />}
       {ruta !== "/" && (
         <ProductDetail
