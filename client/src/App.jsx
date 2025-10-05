@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import { useEffect, useState } from "react";
+import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 
@@ -38,6 +39,7 @@ function App() {
           ruta={ruta}
         />
       )}
+      <Footer />
     </>
   );
 }
