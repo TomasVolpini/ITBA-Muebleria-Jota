@@ -1,3 +1,5 @@
+import "../styles/Hero.css";
+
 const Hero = () => {
     return (
         <section className="hero--gradiente">
