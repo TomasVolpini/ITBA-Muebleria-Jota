@@ -1,3 +1,5 @@
+import "../styles/FeaturedProducts.css";
+
 export default function FeaturedProducts({ products, setRuta }) {
 	// Seleccionar solo los primeros 4 productos para destacados
 	const featuredProducts = products.slice(0, 4);
