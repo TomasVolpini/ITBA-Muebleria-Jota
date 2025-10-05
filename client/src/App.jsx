@@ -2,6 +2,7 @@ import "./styles/App.css";
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import CartPanel from "./components/CartPanel";
+import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
@@ -94,6 +95,8 @@ function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
       />
+
+      <Hero />
       
       {ruta === "/" && (
         <ProductList products={products} setRuta={setRuta} />
