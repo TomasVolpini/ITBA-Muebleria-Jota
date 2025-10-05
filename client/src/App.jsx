@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import CartPanel from "./components/CartPanel";
 import Hero from "./components/Hero";
+import FeaturedProducts from "./components/FeaturedProducts";
 import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
@@ -97,6 +98,11 @@ function App() {
       />
 
       <Hero />
+
+      <FeaturedProducts 
+        products={products}    
+        setRuta={setRuta}       
+      />
       
       {ruta === "/" && (
         <ProductList products={products} setRuta={setRuta} />
