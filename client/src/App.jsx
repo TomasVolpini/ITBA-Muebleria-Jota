@@ -96,16 +96,19 @@ function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
       />
-
-      <Hero />
-
-      <FeaturedProducts 
-        products={products}    
-        setRuta={setRuta}       
-      />
       
       {ruta === "/" && (
-        <ProductList products={products} setRuta={setRuta} />
+        <>
+          <Hero />
+          <FeaturedProducts 
+            products={products}    
+            setRuta={setRuta}       
+          />
+          <ProductList 
+          products={products} 
+          setRuta={setRuta} 
+          />
+        </>
       )}
       
       {ruta !== "/" && products[indice] && (
