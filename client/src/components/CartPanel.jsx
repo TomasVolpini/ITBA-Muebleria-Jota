@@ -1,5 +1,4 @@
 const CartPanel = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) => {
-	// Función para formatear precios en ARS (tu función existente)
 	function precioARS(valor) {
 		return new Intl.NumberFormat("es-AR", {
 			style: "currency",
@@ -41,6 +40,7 @@ const CartPanel = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem 
 
 			{/* Panel del carrito */}
 			<aside className={`cart-drawer ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
+				{/* Header del carrito */}
 				<div className="cart-drawer__header">
 					<h2>Mi carrito</h2>
 					<button
@@ -52,65 +52,64 @@ const CartPanel = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem 
 					</button>
 				</div>
 
+				{/* Body - Lista de productos */}
 				<div className="cart-drawer__body">
-					{/* Si el carrito está vacío */}
 					{cartItems.length === 0 ? (
 						<p className="cart-empty">Tu carrito está vacío.</p>
 					) : (
-						<>
-							{/* Lista de productos en el carrito */}
-							<ul className="cart-items-list">
-								{cartItems.map((item) => {
-									const urlImg = `https://raw.githubusercontent.com/TomasVolpini/ITBA-Muebleria-Jota/refs/heads/develop/server${item.imagen}`;
+						<ul className="cart-items-list">
+							{cartItems.map((item) => {
+								const urlImg = `https://raw.githubusercontent.com/TomasVolpini/ITBA-Muebleria-Jota/refs/heads/develop/server${item.imagen}`;
 
-									return (
-										<li key={item.id} className="cart-item">
-											<img
-												src={urlImg}
-												alt={item.nombre}
-												className="cart-item__image"
-											/>
-											<div className="cart-item__details">
-												<p className="cart-item__name">{item.nombre}</p>
-												<p className="cart-item__price">{precioARS(item.precio)}</p>
-											</div>
-											<div className="cart-item__quantity">
-												<button
-													className="cart-item__btn"
-													onClick={() => handleDecrement(item.id)}
-													aria-label="Disminuir cantidad"
-												>
-													−
-												</button>
-												<span className="cart-item__count">{item.quantity}</span>
-												<button
-													className="cart-item__btn"
-													onClick={() => handleIncrement(item.id)}
-													aria-label="Aumentar cantidad"
-												>
-													+
-												</button>
-											</div>
-										</li>
-									);
-								})}
-							</ul>
-
-							{/* Resumen del carrito */}
-							<div className="cart-summary">
-								<div className="cart-summary__total">
-									<strong>Total:</strong>
-									<span className="cart-summary__amount">
-										{precioARS(calculateTotal())}
-									</span>
-								</div>
-								<button className="btn-checkout">
-									Proceder al pago
-								</button>
-							</div>
-						</>
+								return (
+									<li key={item.id} className="cart-item">
+										<img
+											src={urlImg}
+											alt={item.nombre}
+											className="cart-item__image"
+										/>
+										<div className="cart-item__details">
+											<p className="cart-item__name">{item.nombre}</p>
+											<p className="cart-item__price">{precioARS(item.precio)}</p>
+										</div>
+										<div className="cart-item__quantity">
+											<button
+												className="cart-item__btn"
+												onClick={() => handleDecrement(item.id)}
+												aria-label="Disminuir cantidad"
+											>
+												−
+											</button>
+											<span className="cart-item__count">{item.quantity}</span>
+											<button
+												className="cart-item__btn"
+												onClick={() => handleIncrement(item.id)}
+												aria-label="Aumentar cantidad"
+											>
+												+
+											</button>
+										</div>
+									</li>
+								);
+							})}
+						</ul>
 					)}
 				</div>
+
+				{/* Resumen del carrito - FUERA del body scrolleable */}
+				{cartItems.length > 0 && (
+					<div className="cart-summary">
+						<div className="cart-summary__total">
+							<strong>Total:</strong>
+							<span className="cart-summary__amount">
+								{precioARS(calculateTotal())}
+							</span>
+						</div>
+						<button className="btn-checkout">
+							Proceder al pago
+						</button>
+					</div>
+				)}
 			</aside>
 		</>
 	);
