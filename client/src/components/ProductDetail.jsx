@@ -1,10 +1,14 @@
 import "../styles/ProductDetail.css";
 
-export default function ProductDetail({ products, setRuta, ruta }) {
+export default function ProductDetail({ products, setRuta, ruta, onAddToCart }) {
   const urlImg = `https://raw.githubusercontent.com/TomasVolpini/ITBA-Muebleria-Jota/refs/heads/develop/server${products.imagen}`;
-  // nota 2: seguramente haya que cambiar tanto la ruta del fetch como la de img cuando hagamos merge al main, porque ahora la base de datos a la que hacemos fetch está en la rama develop, la cual va a ser eliminada después de hacer merge
+
   function handleClose() {
     setRuta(`/`);
+  }
+
+  function handleAddToCart() {
+    onAddToCart(products);
   }
 
   function precioARS(valor) {
@@ -50,7 +54,10 @@ export default function ProductDetail({ products, setRuta, ruta }) {
 
         {/* Botones de acción */}
         <div className="product-actions">
-          <button className="add-cart">
+          <button 
+            className="add-cart"
+            onClick={handleAddToCart}
+          >
             Añadir al Carrito
           </button>
           <button 
