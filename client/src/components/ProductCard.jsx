@@ -5,20 +5,11 @@ export default function ProductCard({ product, setRuta }) {
     setRuta(`${product.id}`);
   }
 
-  function precioARS(valor) {
-    return new Intl.NumberFormat("es-AR", {
-      style: "currency",
-      currency: "ARS",
-      minimumFractionDigits: 0,
-    }).format(valor);
-  }
-
   return (
     <div className="card">
-      <img src={urlImg} alt="" />
+      <img className="thumb" src={urlImg} alt="" />
       <p className="product-name">{product.nombre}</p>
-      <p className="product-price">{precioARS(product.precio)}</p>
-      <button onClick={handleClick}>Ver más</button>
+      <button className="btn-overlay" onClick={handleClick}>Ver Detalles</button>
     </div>
   );
 }
