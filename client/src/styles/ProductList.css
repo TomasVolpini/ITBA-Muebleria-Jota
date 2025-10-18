@@ -1,0 +1,240 @@
+/* === Contenedor principal === */
+#grid {
+	max-width: 1250px;
+	margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+/* === Bloques de categoría === */
+.category-block {
+	margin: 26px 0 38px;
+	padding: 12px 12px 18px;
+	border: 1px solid var(--bg, #fff);
+	border-radius: var(--radius, 18px);
+	background: var(--bg, #fff);
+	box-shadow: 0 6px 18px rgba(160, 82, 45, 0.08);
+}
+
+.category-title {
+	margin: 0 0 12px;
+	padding: 0 12px;
+	font-size: 1.25rem;
+	font-family: "Inter", sans-serif;
+	font-weight: 700;
+	color: var(--siena);
+}
+
+/* === Carrusel === */
+.carousel {
+	position: relative;
+}
+
+.track {
+	display: flex;
+	gap: 16px;
+	overflow-x: auto;
+	padding: 6px 6px 12px;
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	overscroll-behavior-x: contain;
+	scrollbar-width: thin;
+}
+
+.track:focus {
+	outline: none;
+}
+
+.track::-webkit-scrollbar {
+	height: 8px;
+}
+
+.track::-webkit-scrollbar-thumb {
+	background: var(--rosa, var(--siena));
+	border-radius: 8px;
+}
+
+/* === Botones de carrusel === */
+.carousel-btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 36px;
+	width: 36px;
+	display: grid;
+	place-items: center;
+	border-radius: 999px;
+	border: 1px solid var(--siena);
+	background: var(--bg, #fff);
+	color: var(--siena);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+	cursor: pointer;
+	user-select: none;
+	z-index: 5;
+	transition: all 0.2s ease;
+}
+
+.carousel-btn:hover:not(:disabled) {
+	background: var(--siena);
+	color: #fff;
+	border-color: var(--siena);
+}
+
+.carousel-btn:active:not(:disabled) {
+	background: var(--oro, #8b3f1e);
+}
+
+.carousel-btn[disabled] {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.carousel-btn.prev {
+	left: 6px;
+}
+
+.carousel-btn.next {
+	right: 6px;
+}
+
+@media (max-width: 480px) {
+	.carousel-btn.prev {
+		left: 4px;
+	}
+	.carousel-btn.next {
+		right: 4px;
+	}
+}
+
+/* === Tarjetas === */
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 260px;
+	background: #fff;
+	border: 1px solid var(--card-border);
+	border-radius: var(--radius, 8px);
+	overflow: hidden;
+	box-shadow: 0 6px 18px rgba(160, 82, 45, 0.12);
+	transition: transform 0.15s, box-shadow 0.15s;
+	scroll-snap-align: start;
+}
+
+.card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 28px rgba(160, 82, 45, 0.18);
+}
+
+/* Imagen principal */
+.thumb {
+	position: relative;
+	background: var(--alabastro, #f9fafb);
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+}
+
+.thumb img,
+.card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.35s;
+}
+
+.card:hover img {
+	transform: scale(1.05);
+}
+
+/* Overlay oscuro */
+.thumb::after,
+.card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(0deg, rgba(160, 82, 45, 0.3), rgba(0, 0, 0, 0.1));
+	opacity: 0;
+	transition: opacity 0.2s;
+	pointer-events: none;
+	z-index: 1;
+}
+
+.card:hover::before,
+.card:hover .btn-overlay,
+.thumb:hover::after,
+.thumb:focus-within .btn-overlay {
+	opacity: 1;
+}
+
+/* Botón flotante */
+.btn-overlay {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(0.98);
+	padding: 10px 16px;
+	border-radius: 999px;
+	background: var(--siena);
+	color: #fff;
+	font-weight: 700;
+	font-size: 0.9rem;
+	border: none;
+	text-decoration: none;
+	box-shadow: 0 6px 20px rgba(160, 82, 45, 0.35);
+	opacity: 0;
+	transition: opacity 0.2s, transform 0.2s;
+	z-index: 2;
+}
+
+.btn-overlay:hover {
+	background: var(--oro);
+}
+
+.btn-overlay:focus-visible {
+	outline: 3px solid rgba(135, 169, 107, 0.6);
+	outline-offset: 2px;
+}
+
+.card:hover .btn-overlay {
+	transform: translate(-50%, -50%) scale(1);
+}
+
+/* Pantallas táctiles: siempre mostrar overlay */
+@media (hover: none) {
+	.thumb::after,
+	.card::before {
+		opacity: 0.18;
+	}
+
+	.btn-overlay {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+/* Título flotante */
+.product-name {
+	position: absolute;
+	left: 50%;
+	top: 10px;
+	transform: translate(-50%, -8px);
+	background: rgba(255, 255, 255, 0.96);
+	color: var(--siena);
+	font-family: "Inter", sans-serif;
+	font-weight: 700;
+	padding: 6px 12px;
+	border-radius: 999px;
+	box-shadow: 0 6px 18px rgba(160, 82, 45, 0.12);
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.18s ease, transform 0.18s ease;
+	z-index: 6;
+}
+
+.card:hover .product-name,
+.card:focus-within .product-name {
+	opacity: 1;
+	transform: translate(-50%, 0);
+}
