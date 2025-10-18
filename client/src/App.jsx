@@ -41,22 +41,19 @@ function App() {
     setCart(prevCart => {
       // Verificar si el producto ya está en el carrito
       const existingItem = prevCart.find(item => item.id === product.id);
-      
+
       if (existingItem) {
         // Si ya existe, incrementar la cantidad
         return prevCart.map(item =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
         );
       }
-      
       // Si no existe, agregarlo con quantity: 1
       return [...prevCart, { ...product, quantity: 1 }];
-    });
-    
-    // Abrir el carrito automáticamente al añadir un producto
-    setIsCartOpen(true);
+  });
+
   };
 
   // Función para actualizar la cantidad de un producto en el carrito
@@ -96,24 +93,28 @@ function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
       />
-
-      <Hero />
-
-      <FeaturedProducts 
-        products={products}    
-        setRuta={setRuta}       
-      />
       
       {ruta === "/" && (
-        <ProductList products={products} setRuta={setRuta} />
+        <>
+          <Hero />
+          <FeaturedProducts 
+            products={products}    
+            setRuta={setRuta}       
+          />
+          <ProductList 
+            products={products} 
+            setRuta={setRuta} 
+          />
+        </>
       )}
       
       {ruta !== "/" && products[indice] && (
-        <ProductDetail
-          products={products[indice]}
-          setRuta={setRuta}
-          ruta={ruta}
-        />
+          <ProductDetail
+            products={products[indice]}
+            setRuta={setRuta}
+            ruta={ruta}
+            onAddToCart={handleAddToCart}
+          />
       )}
       
       <Footer />
