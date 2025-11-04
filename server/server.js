@@ -1,15 +1,21 @@
 import express from "express";
-const app = express();
 import productRoutes from "./routes/productRoutes.js";
-import createError from "http-errors";
+import cors from "cors";
+import { loger } from "./middleware/loger.js";
+import { notFound } from "./middleware/notFound.js";
+import { serverErrors } from "./middleware/serverErrors.js";
+import dotenv from "dotenv";
+dotenv.config({ path: "./server/.env" });
+import { connectToDB } from "./database/db.js";
 
+const app = express();
 app.use(express.json());
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} ${req.method} ${req.originalUrl}`);
-  next();
-});
+app.use(cors());
+// Falta agregar las limitaciones al cors, una vez subido a Render
+
+app.use(loger);
 
 app.get("/", (req, res) => {
   res.send("¡Bienvenido al API de Mueblería Jota!");
@@ -17,20 +23,17 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoutes);
 
-app.use((req, res, next) => {
-  next(createError(404, `Ruta no encontrada: ${req.originalUrl}`));
-});
+app.use(notFound);
+app.use(serverErrors);
 
-app.use((err, req, res, next) => {
-  const statusCode = err.status || 500;
-
-  console.error(err.message, err.stack);
-
-  res.status(statusCode).json({
-    message: err.message || "Ha ocurrido un error en el servidor.",
-
-    stack: process.env.NODE_ENV === "production" ? "🥞" : err.stack,
+connectToDB()
+  .then(() => {
+    console.log("Base de datos conectada");
+    app.listen(PORT, () =>
+      console.log(`Servidor escuchando en el puerto ${PORT}`)
+    );
+  })
+  .catch((err) => {
+    console.error("Error al conectar a la base de datos:", err.message);
+    process.exit(1);
   });
-});
-
-app.listen(PORT, () => console.log(`API en http://localhost:${PORT}`));
