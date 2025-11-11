@@ -1,4 +1,5 @@
 import "../styles/Hero.css";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
     return (
@@ -10,9 +11,9 @@ const Hero = () => {
                 <p className="hero__subtitle">
                     Descubrí productos creados para durar y enamorar.
                 </p>
-                <a href="/" className="btn-hero">
+                <Link to="/productos" className="btn-hero">
                     Ver productos
-                </a>
+                </Link>
             </div>
         </section>
     );
