@@ -8,9 +8,6 @@ import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import ContactoPage from "./components/ContactoPage";
-import NewProduct from "./components/NewProduct";
-
-
 
 function App() {
   // Estados para los paneles
@@ -22,10 +19,9 @@ function App() {
 
   // Estados para productos y rutas
   const [products, setProducts] = useState([]);
-  const [ruta, setRuta] = useState("/admin/crear-producto");
+  const [ruta, setRuta] = useState("/");
   const idBuscado = ruta;
   const indice = products.findIndex((producto) => producto.id === idBuscado);
-
 
   // Fetch de productos
   useEffect(() => {
@@ -112,32 +108,12 @@ function App() {
           ruta={ruta}
           onAddToCart={handleAddToCart}
         />
-      )}  
-      {ruta === "/admin/crear-producto" && (
-        <NewProduct
-          onCreated={(nuevo) => {
-      // Lo sumamos al estado local (normalizo id para que tu UI siga igual)
-          setProducts((prev) => [{ ...nuevo, id: nuevo._id }, ...prev]);
-      // Ir al “detalle” usando tu sistema actual
-          setRuta(nuevo._id);
-        }}
-    onCancel={() => setRuta("/")}
-  />
-)}
-    
+      )}
 
       {ruta === "/contacto" && <ContactoPage></ContactoPage>}
-      <button onClick={() => setRuta("/admin/crear-producto")} style={{margin: 20}}>
-      Ir al formulario
-     </button>
-
 
       <Footer />
-
-      
-
     </>
-    
   );
 }
 
