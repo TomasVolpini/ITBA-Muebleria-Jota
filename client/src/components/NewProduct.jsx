@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "../styles/NewProduct.css";
 
+//hola, debug
+
 export default function NewProduct({ onCreated, onCancel }) {
   const [form, setForm] = useState({
     nombre: "",
@@ -8,7 +10,7 @@ export default function NewProduct({ onCreated, onCancel }) {
     precio: "",
     stock: "",
     imagenUrl: "",
-    imagen: ""
+    imagen: "",
   });
 
   const [error, setError] = useState("");
@@ -27,7 +29,7 @@ export default function NewProduct({ onCreated, onCancel }) {
     const payload = {
       ...form,
       precio: Number(form.precio),
-      stock: Number(form.stock || 0)
+      stock: Number(form.stock || 0),
     };
 
     try {
@@ -36,7 +38,7 @@ export default function NewProduct({ onCreated, onCancel }) {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
         }
       );
 
@@ -44,7 +46,6 @@ export default function NewProduct({ onCreated, onCancel }) {
 
       const created = await res.json();
       onCreated?.(created);
-
     } catch (err) {
       setError(err.message);
     } finally {
@@ -59,7 +60,6 @@ export default function NewProduct({ onCreated, onCancel }) {
       {error && <p className="error-message">{error}</p>}
 
       <form onSubmit={onSubmit} className="new-product-form">
-
         <label>
           Nombre
           <input
