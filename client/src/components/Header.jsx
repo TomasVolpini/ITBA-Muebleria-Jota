@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import HamburgerMenu from "./HamburgerMenu";
 import CartButton from "./CartButton";
 
@@ -6,7 +7,6 @@ const Header = ({
   onCartOpen,
   onMenuToggle,
   isMenuOpen,
-  setRuta,
 }) => {
   return (
     <header className="header">
@@ -14,14 +14,13 @@ const Header = ({
       <HamburgerMenu isOpen={isMenuOpen} onToggle={onMenuToggle} />
 
       {/* Logo */}
-      <a
-        href="#"
+      <Link
+        to="/"
         className="logo"
-        onClick={() => setRuta("/")}
         aria-label="Ir a la página principal de Hermanos Jota"
       >
-        <img src="./public/logo.svg" alt="Logo de Hermanos Jota" />
-      </a>
+        <img src="/logo.svg" alt="Logo de Hermanos Jota" />
+      </Link>
 
       {/* Menú principal (desplegable en mobile) */}
       <nav
@@ -30,19 +29,19 @@ const Header = ({
       >
         <ul>
           <li>
-            <a onClick={() => setRuta("/")} href="#" className="is-active">
+            <Link to="/" onClick={() => onMenuToggle()}>
               Inicio
-            </a>
+            </Link>
           </li>
           <li>
-            <a onClick={() => setRuta("/")} href="#">
+            <Link to="/productos" onClick={() => onMenuToggle()}>
               Productos
-            </a>
+            </Link>
           </li>
           <li>
-            <a onClick={() => setRuta("/contacto")} href="#">
+            <Link to="/contacto" onClick={() => onMenuToggle()}>
               Contacto
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

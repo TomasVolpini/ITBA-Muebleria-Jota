@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
     return (
     <footer>
@@ -29,9 +31,9 @@ function Footer() {
                 <h4>Contacto</h4>
                 <p>
                     ¿Tenés consultas o querés coordinar una visita?<br />
-                    <a href="">
+                    <Link to="/contacto">
                         Visitá nuestra página de contacto &rarr;
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>

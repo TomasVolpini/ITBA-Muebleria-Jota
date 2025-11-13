@@ -14,7 +14,7 @@ const CartPanel = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem 
 
 	// Incrementar cantidad
 	const handleIncrement = (itemId) => {
-		const item = cartItems.find(i => i.id === itemId);
+		const item = cartItems.find(i => i._id === itemId);
 		if (item) {
 			onUpdateQuantity(itemId, item.quantity + 1);
 		}
@@ -22,7 +22,7 @@ const CartPanel = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem 
 
 	// Decrementar cantidad
 	const handleDecrement = (itemId) => {
-		const item = cartItems.find(i => i.id === itemId);
+		const item = cartItems.find(i => i._id === itemId);
 		if (item && item.quantity > 1) {
 			onUpdateQuantity(itemId, item.quantity - 1);
 		} else if (item && item.quantity === 1) {
@@ -59,10 +59,10 @@ const CartPanel = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem 
 					) : (
 						<ul className="cart-items-list">
 							{cartItems.map((item) => {
-								const urlImg = `https://raw.githubusercontent.com/TomasVolpini/ITBA-Muebleria-Jota/refs/heads/develop/server${item.imagen}`;
+								const urlImg = `https://tomasvolpini.github.io/ITBA-Muebleria-Jota/server${item.imagen}`;
 
 								return (
-									<li key={item.id} className="cart-item">
+									<li key={item._id} className="cart-item">
 										<img
 											src={urlImg}
 											alt={item.nombre}
@@ -75,7 +75,7 @@ const CartPanel = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem 
 										<div className="cart-item__quantity">
 											<button
 												className="cart-item__btn"
-												onClick={() => handleDecrement(item.id)}
+												onClick={() => handleDecrement(item._id)}
 												aria-label="Disminuir cantidad"
 											>
 												−
@@ -83,7 +83,7 @@ const CartPanel = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem 
 											<span className="cart-item__count">{item.quantity}</span>
 											<button
 												className="cart-item__btn"
-												onClick={() => handleIncrement(item.id)}
+												onClick={() => handleIncrement(item._id)}
 												aria-label="Aumentar cantidad"
 											>
 												+
