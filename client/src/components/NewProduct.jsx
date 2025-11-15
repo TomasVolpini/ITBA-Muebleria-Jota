@@ -1,31 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/NewProduct.css";
 
-//hola, debug
+const API_URL = "https://itba-muebleria-jota.onrender.com/api/products";
 
-export default function NewProduct({ onCreated, onCancel }) {
+export default function NewProduct() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("NewProduct mounted", { pathname: window.location.pathname });
+  }, []);
+
   const [form, setForm] = useState({
     nombre: "",
     descripcion: "",
     precio: "",
     stock: "",
-    imagenUrl: "",
-    imagen: "",
+    imagen: "",     // ruta relativa: /img/sofa-x.jpg
+    imagenUrl: "",  // por si después usan URL absoluta
   });
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function onChange(e) {
+  function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  async function onSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setLoading(true);
     setError("");
+    setLoading(true);
 
+    // armamos el objeto que va a la API
     const payload = {
       ...form,
       precio: Number(form.precio),
@@ -33,33 +41,46 @@ export default function NewProduct({ onCreated, onCancel }) {
     };
 
     try {
-      const res = await fetch(
-        "https://itba-muebleria-jota.onrender.com/api/productos",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-      if (!res.ok) throw new Error("Error creando producto");
+      if (!res.ok) {
+        throw new Error("No se pudo crear el producto");
+      }
 
       const created = await res.json();
-      onCreated?.(created);
+
+      // Después de crear, vamos al detalle del producto nuevo
+      // (la API devuelve _id)
+      if (created._id) {
+        navigate(`/productos/${created._id}`);
+      } else {
+        // si por alguna razón no hay _id, volvemos al listado
+        navigate("/productos");
+      }
     } catch (err) {
-      setError(err.message);
+      console.error(err);
+      setError(err.message || "Error inesperado");
     } finally {
       setLoading(false);
     }
   }
 
+  function handleCancel() {
+    // cancelar: volvemos al catálogo
+    navigate("/productos");
+  }
+
   return (
-    <section className="new-product-container">
-      <h2>Crear nuevo producto</h2>
+    <main className="page new-product-page">
+      <h1>Crear nuevo producto</h1>
 
       {error && <p className="error-message">{error}</p>}
 
-      <form onSubmit={onSubmit} className="new-product-form">
+      <form onSubmit={handleSubmit} className="new-product-form">
         <label>
           Nombre
           <input
@@ -67,7 +88,7 @@ export default function NewProduct({ onCreated, onCancel }) {
             name="nombre"
             required
             value={form.nombre}
-            onChange={onChange}
+            onChange={handleChange}
           />
         </label>
 
@@ -76,7 +97,7 @@ export default function NewProduct({ onCreated, onCancel }) {
           <textarea
             name="descripcion"
             value={form.descripcion}
-            onChange={onChange}
+            onChange={handleChange}
           />
         </label>
 
@@ -89,7 +110,7 @@ export default function NewProduct({ onCreated, onCancel }) {
             step="0.01"
             required
             value={form.precio}
-            onChange={onChange}
+            onChange={handleChange}
           />
         </label>
 
@@ -100,29 +121,29 @@ export default function NewProduct({ onCreated, onCancel }) {
             name="stock"
             min="0"
             value={form.stock}
-            onChange={onChange}
+            onChange={handleChange}
           />
         </label>
 
         <label>
-          Imagen (URL absoluta)
+          Imagen (ruta relativa, la que usa la API)
+          <input
+            type="text"
+            name="imagen"
+            placeholder="/img/silla-nordica.jpg"
+            value={form.imagen}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          Imagen URL (opcional, absoluta)
           <input
             type="text"
             name="imagenUrl"
             placeholder="https://..."
             value={form.imagenUrl}
-            onChange={onChange}
-          />
-        </label>
-
-        <label>
-          Imagen (ruta relativa legacy)
-          <input
-            type="text"
-            name="imagen"
-            placeholder="/img/sofa.png"
-            value={form.imagen}
-            onChange={onChange}
+            onChange={handleChange}
           />
         </label>
 
@@ -131,11 +152,11 @@ export default function NewProduct({ onCreated, onCancel }) {
             {loading ? "Creando..." : "Crear producto"}
           </button>
 
-          <button type="button" onClick={() => onCancel?.()}>
+          <button type="button" onClick={handleCancel}>
             Cancelar
           </button>
         </div>
       </form>
-    </section>
+    </main>
   );
 }

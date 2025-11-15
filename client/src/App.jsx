@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import ContactoPage from "./components/ContactoPage";
+import NewProduct from "./components/NewProduct";
 
 function App() {
   // Estados para los paneles
@@ -93,6 +94,9 @@ function App() {
 
         {/* Página de contacto */}
         <Route path="/contacto" element={<ContactoPage />} />
+        {/* Página para agregar nuevo producto */}
+        <Route path="/admin/crear-producto" element={<NewProduct />} />
+        <Route path="/debug-new-product" element={<NewProduct />} />
       </Routes>
 
       <Footer />

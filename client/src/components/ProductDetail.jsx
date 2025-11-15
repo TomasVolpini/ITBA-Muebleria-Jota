@@ -46,6 +46,28 @@ export default function ProductDetail({ onAddToCart }) {
     }
   };
 
+  const handleDelete = async () => {
+    const seguro = window.confirm(
+      "¿Seguro que querés eliminar este producto?"
+    );
+    if (!seguro) return;
+
+    try {
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("No se pudo eliminar el producto");
+      }
+
+      navigate("/productos");
+    } catch (err) {
+      console.error("Error al eliminar:", err);
+      alert(err.message || "Error eliminando el producto");
+    }
+  };
+
   const precioARS = (valor) => {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -54,7 +76,6 @@ export default function ProductDetail({ onAddToCart }) {
     }).format(valor);
   };
 
-  // Estado de carga
   if (loading) {
     return (
       <div style={{ textAlign: "center", padding: "3rem", minHeight: "60vh" }}>
@@ -63,7 +84,6 @@ export default function ProductDetail({ onAddToCart }) {
     );
   }
 
-  // Estado de error
   if (error) {
     return (
       <div style={{ textAlign: "center", padding: "3rem", minHeight: "60vh" }}>
@@ -78,7 +98,6 @@ export default function ProductDetail({ onAddToCart }) {
     );
   }
 
-  // Si no hay producto
   if (!product) {
     return (
       <div style={{ textAlign: "center", padding: "3rem", minHeight: "60vh" }}>
@@ -97,19 +116,15 @@ export default function ProductDetail({ onAddToCart }) {
 
   return (
     <section className="page layout-leftpic">
-      {/* Imagen del producto */}
       <div className="product-img">
         <img src={urlImg} alt={product.nombre} />
       </div>
 
-      {/* Información del producto */}
       <div className="product-info">
         <h2>{product.nombre}</h2>
 
-        {/* Descripción */}
         <p className="desc">{product.descripcion}</p>
 
-        {/* Tabla de características */}
         {product.caracteristicas && (
           <table className="specs">
             <tbody>
@@ -123,19 +138,16 @@ export default function ProductDetail({ onAddToCart }) {
           </table>
         )}
 
-        {/* Stock */}
         {product.stock !== undefined && (
           <p className="stock">
             <strong>Stock disponible:</strong> {product.stock} unidades
           </p>
         )}
 
-        {/* Precio */}
         <p className="price">
           <strong>Precio: {precioARS(product.precio)}</strong>
         </p>
 
-        {/* Botones de acción */}
         <div className="product-actions">
           <button className="add-cart" onClick={handleAddToCart}>
             Añadir al Carrito
@@ -143,6 +155,10 @@ export default function ProductDetail({ onAddToCart }) {
           <button onClick={handleClose} className="btn-close">
             Volver
           </button>
+          <button onClick={handleDelete} className="btn-delete">
+            Eliminar producto
+          </button>
+
         </div>
       </div>
     </section>

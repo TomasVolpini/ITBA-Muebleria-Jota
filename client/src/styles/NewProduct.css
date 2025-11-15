@@ -1,0 +1,142 @@
+/* ============================================
+   CONTENEDOR PRINCIPAL
+============================================ */
+.new-product-page {
+  padding: 3rem 1rem;
+  background: linear-gradient(to bottom, #fffdfb, #fff7f1);
+  min-height: 100vh;
+}
+
+.new-product-page h1 {
+  text-align: center;
+  font-size: 2.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12rem;
+  margin-bottom: 3rem;
+  color: #8b4513;
+}
+
+
+/* ============================================
+   FORMULARIO PRINCIPAL
+============================================ */
+.new-product-form {
+  background: #fffaf6;
+  padding: 3rem;
+  border-radius: 22px;
+
+  box-shadow:
+    0 10px 35px rgba(139, 69, 19, 0.08),
+    0 20px 45px rgba(139, 69, 19, 0.05),
+    0 0 80px rgba(139, 69, 19, 0.06);
+
+  border: 1px solid rgba(139, 69, 19, 0.15);
+  max-width: 900px;
+  margin: 0 auto 5rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+
+/* ============================================
+   LABELS
+============================================ */
+.new-product-form label {
+  font-weight: 700;
+  color: #8b4513;
+  letter-spacing: 0.06rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 1.1rem;
+}
+
+
+/* ============================================
+   INPUTS Y TEXTAREA  (BLANCOS)
+============================================ */
+.new-product-form input,
+.new-product-form textarea {
+  background: #ffffff;  /* AHORA BLANCOS */
+  border: 2px solid rgba(139, 69, 19, 0.35);
+  padding: 1rem 1.2rem;
+  border-radius: 22px;
+  font-size: 1rem;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.25s ease;
+
+  box-shadow:
+    inset 0 1px 2px rgba(139, 69, 19, 0.05),
+    0 3px 6px rgba(139, 69, 19, 0.08);
+}
+
+.new-product-form textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+.new-product-form input:focus,
+.new-product-form textarea:focus {
+  background: #ffffff;
+  border-color: #a35722;
+  box-shadow:
+    inset 0 1px 4px rgba(181, 99, 45, 0.18),
+    0 0 12px rgba(181, 99, 45, 0.25);
+}
+
+
+/* ============================================
+   BOTONES
+============================================ */
+.new-product-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.new-product-buttons button {
+  padding: 0.9rem 1.8rem;
+  border-radius: 22px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  letter-spacing: 0.04rem;
+  font-family: inherit;
+}
+
+/* Botón CREAR */
+.new-product-buttons button[type="submit"] {
+  background-color: #a35722;
+  color: white;
+}
+
+.new-product-buttons button[type="submit"]:hover {
+  background-color: #8b4513;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(139, 69, 19, 0.35);
+}
+
+/* Botón CANCELAR */
+.new-product-buttons button[type="button"] {
+  background-color: #fff;
+  border: 2px solid #a35722;
+  color: #a35722;
+}
+
+.new-product-buttons button[type="button"]:hover {
+  background-color: #f3e5d8;
+  transform: translateY(-2px);
+}
+
+
+/* Error */
+.error-message {
+  color: #b3261e;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}

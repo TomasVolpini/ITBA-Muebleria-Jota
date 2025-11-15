@@ -1,5 +1,7 @@
+// ProductList.jsx
 import ProductCard from "./ProductCard";
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";         // ← NUEVO
 import "../styles/ProductList.css";
 
 const API_URL = "https://itba-muebleria-jota.onrender.com/api/products";
@@ -14,11 +16,11 @@ export default function ProductList() {
       try {
         setLoading(true);
         const response = await fetch(API_URL);
-        
+
         if (!response.ok) {
           throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
-        
+
         const data = await response.json();
         setProducts(data);
         setError(null);
@@ -56,7 +58,7 @@ export default function ProductList() {
     return (
       <div style={{ textAlign: "center", padding: "3rem", color: "red" }}>
         <p>Error al cargar productos: {error}</p>
-        <button 
+        <button
           onClick={() => window.location.reload()}
           style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}
         >
@@ -71,6 +73,16 @@ export default function ProductList() {
 
   return (
     <div id="grid" aria-label="Catálogo por categoría">
+      {/* Botón arriba a la izquierda */}
+      <div style={{ marginBottom: "2rem" }}>
+        <Link
+         to="/admin/crear-producto"
+        className="btn-create-product"
+        >
+          + Crear producto
+        </Link>
+      </div>
+
       {categories.map((category) => (
         <CategoryBlock
           key={category}

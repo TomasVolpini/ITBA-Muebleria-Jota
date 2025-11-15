@@ -238,3 +238,29 @@
 	opacity: 1;
 	transform: translate(-50%, 0);
 }
+
+.btn-create-product {
+  display: inline-block;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  background-color: #a35722; /* marrón principal */
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.02rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.18);
+}
+
+.btn-create-product:hover {
+  background-color: #8b4513; /* marrón más oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 69, 19, 0.28);
+}
+
+.btn-create-product:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(139, 69, 19, 0.22);
+}
