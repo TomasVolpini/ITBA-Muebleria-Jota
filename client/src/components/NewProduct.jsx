@@ -16,8 +16,8 @@ export default function NewProduct() {
     descripcion: "",
     precio: "",
     stock: "",
-    imagen: "",     // ruta relativa: /img/sofa-x.jpg
-    imagenUrl: "",  // por si después usan URL absoluta
+    imagen: "", // ruta relativa: /img/sofa-x.jpg
+    imagenUrl: "", // por si después usan URL absoluta
   });
 
   const [error, setError] = useState("");

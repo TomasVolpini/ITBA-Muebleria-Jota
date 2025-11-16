@@ -58,7 +58,8 @@
 ============================================ */
 .new-product-form input,
 .new-product-form textarea {
-  background: #ffffff;  /* AHORA BLANCOS */
+  background: #ffffff;
+  /* AHORA BLANCOS */
   border: 2px solid rgba(139, 69, 19, 0.35);
   padding: 1rem 1.2rem;
   border-radius: 22px;
