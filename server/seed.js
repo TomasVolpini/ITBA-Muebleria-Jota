@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config({ path: "./server/.env" });
 import productModel from "./models/product.model.js";
 
 const data = [
