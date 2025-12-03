@@ -7,10 +7,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
       lowercase: true,
       match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Email inválido"],
     },
-    email: { type: String, required: true, unique: true },
     password: { type: String, required: true, select: false }, //"select: false" lo excluye por defecto de las queries para mayor seguridad
     role: { type: String, enum: ["user", "admin"], default: "user" },
   },
