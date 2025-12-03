@@ -1,7 +1,7 @@
 import express from "express";
-import { signUp, login } from "../controllers/auth.controller";
-import { getUserProfile } from "../controllers/user.controller";
-import { jwtAuth } from "../middleware/auth";
+import { signUp, login } from "../controllers/auth.controller.js";
+import { getUserProfile } from "../controllers/user.controller.js";
+import { jwtAuth } from "../middleware/auth.js";
 
 const user = express.Router();
 
