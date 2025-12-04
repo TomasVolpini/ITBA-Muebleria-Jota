@@ -1,0 +1,158 @@
+/* src/styles/Profile.css */
+
+/* Contenedor general */
+.profile-page {
+  max-width: 960px;
+  margin: 4rem auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* Título principal */
+.profile-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #5a2b15;
+}
+
+/* Tarjetas de sección */
+.profile-card {
+  background-color: #fff7ef;
+  border-radius: 24px;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f0dac7;
+  margin-bottom: 1.5rem;
+}
+
+/* Título de sección */
+.profile-section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: #7b3f20;
+}
+
+/* Texto auxiliar */
+.profile-text {
+  font-size: 0.95rem;
+  color: #7d6b5b;
+  margin-bottom: 1.25rem;
+}
+
+/* Grid de campos */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+@media (max-width: 700px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Campo individual */
+.profile-field label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  color: #7b3f20;
+}
+
+.profile-field input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #f0dac7;
+  background-color: #fffdf9;
+  font-size: 0.95rem;
+  color: #5a2b15;
+}
+
+.profile-field input:disabled {
+  opacity: 0.9;
+  cursor: default;
+}
+
+/* Botones */
+.profile-actions {
+  margin-top: 2rem;
+  /* aseguramos layout por defecto */
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Ajustes específicos para el formulario de cambio de contraseña
+   para que los botones "Guardar / Cancelar" no queden pegados al botón
+   "Cerrar sesión" y no se sobrepongan. */
+.change-password-form {
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem; /* espacio extra antes del logout */
+}
+
+.change-password-form .profile-actions {
+  margin-top: 0.75rem;
+  margin-bottom: 0; /* el espacio ya está en el form */
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* En pantallas pequeñas, apilar los botones del formulario para evitar solapamientos */
+@media (max-width: 520px) {
+  .change-password-form .profile-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Asegurar que el botón de logout quede separado y a full width */
+  .profile-btn-logout {
+    width: 100%;
+  }
+}
+
+/* Botones comunes */
+.profile-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Cambiar contraseña */
+.profile-btn-outline {
+  background-color: transparent;
+  border: 1px solid #b35a1f;
+  color: #b35a1f;
+}
+
+.profile-btn-outline:hover {
+  background-color: #ffe9d4;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Logout */
+.profile-btn-logout {
+  width: 100%;
+  background-color: #b35a1f;
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(179, 90, 31, 0.35);
+}
+
+.profile-btn-logout:hover {
+  background-color: #9b4d16;
+  box-shadow: 0 12px 32px rgba(155, 77, 22, 0.45);
+  transform: translateY(-1px);
+}
