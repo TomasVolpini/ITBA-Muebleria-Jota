@@ -10,6 +10,15 @@ import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
 import ContactoPage from "./components/ContactoPage";
 import NewProduct from "./components/NewProduct";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./components/Profile";
+import MyOrders from "./components/MyOrders";
+import AdminRoute from "./components/AdminRoute";
+
+
+
 
 function App() {
   // Estados para los paneles
@@ -94,9 +103,13 @@ function App() {
 
         {/* Página de contacto */}
         <Route path="/contacto" element={<ContactoPage />} />
-        {/* Página para agregar nuevo producto */}
-        <Route path="/admin/crear-producto" element={<NewProduct />} />
+        <Route path="/debug-new-product" element={<AdminRoute><NewProduct /></AdminRoute>} />
         <Route path="/debug-new-product" element={<NewProduct />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/perfil" element={<ProtectedRoute><Profile/></ProtectedRoute>} /> 
+        <Route path="/mis-pedidos" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
+
       </Routes>
 
       <Footer />
