@@ -21,7 +21,7 @@ export const jwtAuth = async (req, res, next) => {
 };
 
 export const adminAuth = (req, res, next) => {
-  if (req.user && req.user.rol.includes("admin")) {
+  if (req.user && req.user.role.includes("admin")) {
     next();
   } else {
     next(createError(403, `Acceso denegado. Se requiere rol de administrador`));
