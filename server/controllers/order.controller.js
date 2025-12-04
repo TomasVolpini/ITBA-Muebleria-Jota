@@ -4,7 +4,7 @@ import createError from "http-errors";
 
 export const placeOrder = async (req, res, next) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     const { items, state } = req.body;
 
     if (!items || items.length === 0) {
@@ -44,7 +44,10 @@ export const getUserAllOrders = async (req, res, next) => {
       "items.productId",
       "nombre precio"
     );
-    if (!orders) return next(createError(404, "No se encontró ningún pedido"));
+    if (!orders || orders.length === 0) {
+      return next(createError(404, "No se encontró ningún pedido"));
+    }
+
     res.json(orders);
   } catch (err) {
     console.error("Error getting orders:", err.message);
