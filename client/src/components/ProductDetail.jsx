@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext"; 
 import "../styles/ProductDetail.css";
 
 const API_URL = "https://itba-muebleria-jota.onrender.com/api/products";
@@ -7,6 +8,8 @@ const API_URL = "https://itba-muebleria-jota.onrender.com/api/products";
 export default function ProductDetail({ onAddToCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();                                    
+  const isAdmin = user?.role === "admin" || user?.isAdmin;
   
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,6 +50,7 @@ export default function ProductDetail({ onAddToCart }) {
   };
 
   const handleDelete = async () => {
+    if (!isAdmin) return;
     const seguro = window.confirm(
       "¿Seguro que querés eliminar este producto?"
     );
@@ -155,9 +159,11 @@ export default function ProductDetail({ onAddToCart }) {
           <button onClick={handleClose} className="btn-close">
             Volver
           </button>
-          <button onClick={handleDelete} className="btn-delete">
-            Eliminar producto
-          </button>
+           {isAdmin && (
+            <button onClick={handleDelete} className="btn-delete">
+                Eliminar producto
+            </button>
+          )}
 
         </div>
       </div>

@@ -1,12 +1,15 @@
 // ProductList.jsx
 import ProductCard from "./ProductCard";
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";         // ← NUEVO
+import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext"; 
 import "../styles/ProductList.css";
 
 const API_URL = "https://itba-muebleria-jota.onrender.com/api/products";
 
 export default function ProductList() {
+  const { user } = useAuth();  
+  const isAdmin = user?.role === "admin" || user?.isAdmin;  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -74,14 +77,16 @@ export default function ProductList() {
   return (
     <div id="grid" aria-label="Catálogo por categoría">
       {/* Botón arriba a la izquierda */}
-      <div style={{ marginBottom: "2rem" }}>
-        <Link
-         to="/admin/crear-producto"
-        className="btn-create-product"
+        {isAdmin && (
+        <div style={{ marginBottom: "2rem" }}>
+          <Link
+          to="/admin/crear-producto"
+          className="btn-create-product"
         >
           + Crear producto
-        </Link>
-      </div>
+          </Link>
+        </div>
+      )}
 
       {categories.map((category) => (
         <CategoryBlock
