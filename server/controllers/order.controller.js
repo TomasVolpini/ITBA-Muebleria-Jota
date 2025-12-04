@@ -1,6 +1,7 @@
 import Product from "../models/product.model.js";
 import Order from "../models/order.model.js";
 import createError from "http-errors";
+import mongoose from "mongoose";
 
 export const placeOrder = async (req, res, next) => {
   try {
@@ -18,6 +19,8 @@ export const placeOrder = async (req, res, next) => {
         return next(createError(404, "Producto no encontrado"));
       }
       total += product.precio * item.amount;
+      item.name = product.nombre;
+      item.price = product.precio;
     }
 
     const newOrder = new Order({
@@ -39,11 +42,8 @@ export const placeOrder = async (req, res, next) => {
 
 export const getUserAllOrders = async (req, res, next) => {
   try {
-    const userId = req.user.userId;
-    const orders = await Order.find({ userId }).populate(
-      "items.productId",
-      "nombre precio"
-    );
+    const userId = req.user._id;
+    const orders = await Order.find({ userId });
     if (!orders || orders.length === 0) {
       return next(createError(404, "No se encontró ningún pedido"));
     }
@@ -57,13 +57,14 @@ export const getUserAllOrders = async (req, res, next) => {
 
 export const getUserOneOrder = async (req, res, next) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     const { orderId } = req.params;
 
-    const order = await Order.findOne({ _id: orderId, userId }).populate(
-      "items.productId",
-      "nombre precio"
-    );
+    if (!mongoose.Types.ObjectId.isValid(orderId)) {
+      return next(createError(404, "No se encontró el pedido"));
+    }
+
+    const order = await Order.findOne({ _id: orderId, userId });
     if (!order) return next(createError(404, "No se encontró el pedido"));
     res.json(order);
   } catch (err) {
