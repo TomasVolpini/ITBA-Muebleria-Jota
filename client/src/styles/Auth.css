@@ -1,0 +1,146 @@
+/* ===== LOGIN PAGE ===== */
+.auth-page {
+  max-width: 560px;
+  margin: 60px auto 100px auto;
+  padding: 32px 40px;
+  background: #fff7f0;              /* crema suave */
+  border-radius: 24px;
+  border: 1px solid #f0e0d2;        /* borde muy suave */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  animation: fadeIn 0.4s ease;
+  color: #4a2b1a;
+}
+
+.auth-page h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #4a2b1a;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* ===== FORM ===== */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-field label {
+  font-size: 15px;
+  color: #5a3923;
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
+.auth-field input {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid #e0c6b3;
+  font-size: 14px;
+  background: #fffaf5;
+  color: #3a2617;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.auth-field input::placeholder {
+  color: #b89b87;
+}
+
+.auth-field input:focus {
+  border-color: #c85a27;
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(200, 90, 39, 0.15);
+}
+
+/* ===== BOTÓN ENTRAR ===== */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #9a4316;        /* marrón oscuro tipo “Crear producto” */
+  color: #fff6ef;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #7f360f;        /* un poco más oscuro */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+button[type="submit"]:disabled {
+  background-color: #e1c9ba;
+  color: #f8f1ec;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ===== ERROR ===== */
+.auth-error {
+  margin-bottom: 10px;
+  background: #fff3cd;
+  color: #6b3e00;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+/* ===== FOOTER (REGISTRO) ===== */
+.login-footer {
+  margin-top: 18px;
+  font-size: 14px;
+  text-align: center;
+  color: #5a3923;
+}
+
+.login-footer a {
+  color: #9a4316;                   /* marrón oscuro */
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.login-footer a:hover {
+  color: #7f360f;
+}
+
+/* link dentro del error (contactanos) */
+.login-help-link {
+  color: #9a4316;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.login-help-link:hover {
+  color: #7f360f;
+}
+
+/* ===== ANIMACIÓN ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
