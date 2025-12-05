@@ -1,9 +1,9 @@
 import "../styles/Contacto.css";
-import FormularioContacto from "./FormularioContacto";
-import TallerCard from "./TallerCard";
-import ContactoCard from "./ContactoCard";
-import RedesCard from "./RedesCard";
-import MarcaCard from "./MarcaCard";
+import FormularioContacto from "../components/FormularioContacto";
+import TallerCard from "../components/TallerCard";
+import ContactoCard from "../components/ContactoCard";
+import RedesCard from "../components/RedesCard";
+import MarcaCard from "../components/MarcaCard";
 
 const ContactoPage = () => {
   return (

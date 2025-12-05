@@ -3,32 +3,25 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import CartPanel from "./components/CartPanel";
-import Hero from "./components/Hero";
-import FeaturedProducts from "./components/FeaturedProducts";
 import Footer from "./components/Footer";
-import ProductList from "./components/ProductList";
-import ProductDetail from "./components/ProductDetail";
-import ContactoPage from "./components/ContactoPage";
-import NewProduct from "./components/NewProduct";
-import Register from "./components/Register";
-import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Profile from "./components/Profile";
-import MyOrders from "./components/MyOrders";
 import AdminRoute from "./components/AdminRoute";
-
-
+import HomePage from "./pages/HomePage";
+import ProductListPage from "./pages/ProductListPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import ContactoPage from "./pages/ContactoPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import ProfilePage from "./pages/ProfilePage";
+import MyOrdersPage from "./pages/MyOrdersPage";
+import NewProductPage from "./pages/NewProductPage";
 
 
 function App() {
-  // Estados para los paneles
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  // Estado del carrito
   const [cart, setCart] = useState([]);
 
-  // Función para añadir producto al carrito
   const handleAddToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item._id === product._id);
@@ -44,7 +37,6 @@ function App() {
     });
   };
 
-  // Función para actualizar la cantidad de un producto en el carrito
   const handleUpdateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) return;
 
@@ -55,12 +47,14 @@ function App() {
     );
   };
 
-  // Función para eliminar un producto del carrito
   const handleRemoveItem = (productId) => {
     setCart((prevCart) => prevCart.filter((item) => item._id !== productId));
   };
 
-  // Calcular la cantidad total de items en el carrito
+  const handleClearCart = () => {
+    setCart([]);
+  };
+
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -78,38 +72,56 @@ function App() {
         cartItems={cart}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
+        onClearCart={handleClearCart}
       />
 
       <Routes>
         {/* Página de inicio */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <FeaturedProducts />
-            </>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
 
         {/* Catálogo de productos */}
-        <Route path="/productos" element={<ProductList />} />
+        <Route path="/productos" element={<ProductListPage />} />
 
-        {/* Detalle de producto dinámico */}
+        {/* Detalle de producto */}
         <Route
           path="/productos/:id"
-          element={<ProductDetail onAddToCart={handleAddToCart} />}
+          element={<ProductDetailPage onAddToCart={handleAddToCart} />}
         />
 
         {/* Página de contacto */}
         <Route path="/contacto" element={<ContactoPage />} />
-        <Route path="/debug-new-product" element={<AdminRoute><NewProduct /></AdminRoute>} />
-        <Route path="/debug-new-product" element={<NewProduct />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/perfil" element={<ProtectedRoute><Profile/></ProtectedRoute>} /> 
-        <Route path="/mis-pedidos" element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
 
+        {/* Autenticación */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        {/* Rutas protegidas */}
+        <Route
+          path="/perfil"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/mis-pedidos"
+          element={
+            <ProtectedRoute>
+              <MyOrdersPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Ruta admin */}
+        <Route
+          path="/admin/crear-producto"
+          element={
+            <AdminRoute>
+              <NewProductPage />
+            </AdminRoute>
+          }
+        />
       </Routes>
 
       <Footer />
