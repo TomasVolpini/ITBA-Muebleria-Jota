@@ -19,7 +19,7 @@ export default function ProductDetail({ onAddToCart }) {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetch(`${API_URL}/api/products/${id}`);
 
         if (!response.ok) {
           throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -55,7 +55,7 @@ export default function ProductDetail({ onAddToCart }) {
     if (!seguro) return;
 
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
+      const res = await fetch(`${API_URL}/api/products/${id}`, {
         method: "DELETE",
       });
 

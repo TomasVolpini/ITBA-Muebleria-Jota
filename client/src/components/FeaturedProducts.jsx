@@ -11,7 +11,7 @@ export default function FeaturedProducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(API_URL);
+        const response = await fetch(`${API_URL}/api/products`);
         if (response.ok) {
           const data = await response.json();
           setProducts(data.slice(0, 4)); // Solo primeros 4 productos
