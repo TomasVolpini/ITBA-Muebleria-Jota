@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/FeaturedProducts.css";
 
-const API_URL = "https://itba-muebleria-jota.onrender.com/api/products";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState([]);

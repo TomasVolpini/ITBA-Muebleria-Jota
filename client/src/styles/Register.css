@@ -1,0 +1,86 @@
+/* ===== REGISTER PAGE ===== */
+.auth-page {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  animation: fadeIn 0.4s ease;
+}
+
+.auth-page h2 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* ===== FORM ===== */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-field label {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.auth-field input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: #f9f9f9;
+}
+
+.auth-field input:focus {
+  border-color: #c85a27; /* color cálido que combina con tu sitio */
+  outline: none;
+}
+
+/* ===== BOTÓN ===== */
+button[type="submit"] {
+  margin-top: 8px;
+  width: 100%;
+  padding: 12px;
+  background-color: #c85a27;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #aa4a1f;
+}
+
+button[type="submit"]:disabled {
+  background-color: #c5c5c5;
+  cursor: not-allowed;
+}
+
+/* ===== ERRORES ===== */
+.auth-error {
+  font-size: 12px;
+  color: red;
+  margin-top: 4px;
+}
+
+/* ===== ANIMACIÓN ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

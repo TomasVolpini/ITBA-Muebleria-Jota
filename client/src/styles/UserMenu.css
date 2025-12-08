@@ -1,0 +1,51 @@
+.user-menu-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botón iconito (usa tu estilo de icon-btn + refinado) */
+.user-menu-trigger {
+  color: #5a2b15;
+}
+
+/* Caja flotante */
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);   /* un poquito debajo del iconito */
+  left: 50%;               /* lo posicionamos al 50% del contenedor */
+  transform: translateX(-50%); /* y lo centramos justo debajo */
+  min-width: 190px;
+  background-color: #fff7ef;
+  border-radius: 14px;
+  padding: 0.6rem 0;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
+  border: 1px solid #f0dac7;
+  z-index: 50;
+}
+
+
+
+/* Items */
+.user-menu-item {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 0.92rem;
+  color: #5a2b15;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.user-menu-item:hover {
+  background-color: #fbe2cd;
+}
+
+/* Logout en rojo suave */
+.user-menu-logout {
+  color: #a43124;
+}
