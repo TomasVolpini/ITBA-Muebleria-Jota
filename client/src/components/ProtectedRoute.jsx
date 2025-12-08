@@ -8,17 +8,11 @@ const ProtectedRoute = ({ children }) => {
 
   // si NO está autenticado → lo mando a /login
   if (!isAuthenticated) {
-    return (
-      <Navigate
-        to="/login"
-        replace
-        state={{ from: location.pathname }}
-      />
-    );
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   }
 
   // si está autenticado → muestro el componente hijo
   return children;
 };
 
-export default ProtectedRoute;   // 👈 IMPORTANTE
+export default ProtectedRoute;
