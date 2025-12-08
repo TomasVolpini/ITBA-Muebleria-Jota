@@ -8,7 +8,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 export default function ProductDetail({ onAddToCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const isAdmin = user?.role === "admin" || user?.isAdmin;
 
   const [product, setProduct] = useState(null);
@@ -57,6 +57,9 @@ export default function ProductDetail({ onAddToCart }) {
     try {
       const res = await fetch(`${API_URL}/api/products/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (!res.ok) {

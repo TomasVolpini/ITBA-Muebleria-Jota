@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import "../styles/NewProduct.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function NewProduct() {
   const navigate = useNavigate();
+  const { token } = useAuth();
 
   useEffect(() => {
     console.log("NewProduct mounted", { pathname: window.location.pathname });
@@ -43,7 +45,10 @@ export default function NewProduct() {
     try {
       const res = await fetch(`${API_URL}/api/products`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(payload),
       });
 
