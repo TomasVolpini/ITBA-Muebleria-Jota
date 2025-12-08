@@ -1,15 +1,15 @@
 // ProductList.jsx
-import ProductCard from "./ProductCard";
+import ProductCard from "..components/ProductCard.jsx";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; 
+import { useAuth } from "../contexts/AuthContext";
 import "../styles/ProductList.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function ProductList() {
-  const { user } = useAuth();  
-  const isAdmin = user?.role === "admin" || user?.isAdmin;  
+  const { user } = useAuth();
+  const isAdmin = user?.role === "admin" || user?.isAdmin;
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -77,13 +77,10 @@ export default function ProductList() {
   return (
     <div id="grid" aria-label="Catálogo por categoría">
       {/* Botón arriba a la izquierda */}
-        {isAdmin && (
+      {isAdmin && (
         <div style={{ marginBottom: "2rem" }}>
-          <Link
-          to="/admin/crear-producto"
-          className="btn-create-product"
-        >
-          + Crear producto
+          <Link to="/admin/crear-producto" className="btn-create-product">
+            + Crear producto
           </Link>
         </div>
       )}
