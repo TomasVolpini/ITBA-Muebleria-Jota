@@ -66,7 +66,7 @@ const Register = () => {
     try {
       setLoading(true);
       await register({
-        nombre: form.nombre,
+        username: form.nombre,
         email: form.email,
         password: form.password,
       });
