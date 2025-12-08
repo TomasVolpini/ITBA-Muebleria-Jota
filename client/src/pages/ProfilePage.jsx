@@ -1,4 +1,4 @@
-// src/components/Profile.jsx
+
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "../styles/Profile.css";
@@ -83,7 +83,7 @@ const Profile = () => {
         <div className="profile-grid">
           <div className="profile-field">
             <label>Nombre</label>
-            <input value={safe(user?.nombre)} disabled />
+            <input value={safe(user?.username)} disabled />
           </div>
         </div>
       </section>
