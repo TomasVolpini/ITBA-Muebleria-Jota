@@ -60,6 +60,10 @@ function App() {
     setCart((prevCart) => prevCart.filter((item) => item._id !== productId));
   };
 
+  const handleClearCart = () => {
+    setCart([]); 
+  }
+  
   // Calcular la cantidad total de items en el carrito
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -78,6 +82,7 @@ function App() {
         cartItems={cart}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
+        onClearCart={handleClearCart}
       />
 
       <Routes>

@@ -1,0 +1,138 @@
+/* MyOrders.css */
+.orders-page {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.orders-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #5a2b15;
+  font-family: "Playfair Display", serif;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order-card {
+  background-color: #fff7ef;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0dac7;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f0dac7;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.order-date,
+.order-id {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #7d6b5b;
+}
+
+.order-state {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.order-state--pendiente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.order-state--confirmado {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.order-state--enviado {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.order-items {
+  margin-bottom: 1.25rem;
+}
+
+.order-items h4 {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  color: #5a2b15;
+}
+
+.order-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0dac7;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-item-name {
+  font-weight: 500;
+  color: #5a2b15;
+}
+
+.order-item-details {
+  color: #7d6b5b;
+  font-size: 0.95rem;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 2px solid #f0dac7;
+  font-size: 1.2rem;
+  color: #5a2b15;
+}
+
+.order-total-amount {
+  font-weight: 700;
+  color: #9a4316;
+}
+
+@media (max-width: 600px) {
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-state {
+    align-self: flex-start;
+  }
+
+  .order-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
