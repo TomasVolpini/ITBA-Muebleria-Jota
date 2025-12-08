@@ -1,5 +1,5 @@
 // ProductList.jsx
-import ProductCard from "..components/ProductCard.jsx";
+import ProductCard from "../components/ProductCard.jsx";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
