@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/NewProduct.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.VITE_API_URL;
 
 export default function NewProduct() {
   const navigate = useNavigate();

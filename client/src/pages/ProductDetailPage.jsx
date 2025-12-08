@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; 
+import { useAuth } from "../contexts/AuthContext";
 import "../styles/ProductDetail.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.VITE_API_URL;
 
 export default function ProductDetail({ onAddToCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();                                    
+  const { user } = useAuth();
   const isAdmin = user?.role === "admin" || user?.isAdmin;
-  
+
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,11 +20,11 @@ export default function ProductDetail({ onAddToCart }) {
       try {
         setLoading(true);
         const response = await fetch(`${API_URL}/${id}`);
-        
+
         if (!response.ok) {
           throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
-        
+
         const data = await response.json();
         setProduct(data);
         setError(null);
@@ -51,9 +51,7 @@ export default function ProductDetail({ onAddToCart }) {
 
   const handleDelete = async () => {
     if (!isAdmin) return;
-    const seguro = window.confirm(
-      "¿Seguro que querés eliminar este producto?"
-    );
+    const seguro = window.confirm("¿Seguro que querés eliminar este producto?");
     if (!seguro) return;
 
     try {
@@ -92,7 +90,7 @@ export default function ProductDetail({ onAddToCart }) {
     return (
       <div style={{ textAlign: "center", padding: "3rem", minHeight: "60vh" }}>
         <p style={{ color: "red" }}>Error al cargar el producto: {error}</p>
-        <button 
+        <button
           onClick={handleClose}
           style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}
         >
@@ -106,7 +104,7 @@ export default function ProductDetail({ onAddToCart }) {
     return (
       <div style={{ textAlign: "center", padding: "3rem", minHeight: "60vh" }}>
         <p>Producto no encontrado</p>
-        <button 
+        <button
           onClick={handleClose}
           style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}
         >
@@ -159,12 +157,11 @@ export default function ProductDetail({ onAddToCart }) {
           <button onClick={handleClose} className="btn-close">
             Volver
           </button>
-           {isAdmin && (
+          {isAdmin && (
             <button onClick={handleDelete} className="btn-delete">
-                Eliminar producto
+              Eliminar producto
             </button>
           )}
-
         </div>
       </div>
     </section>
